@@ -1,0 +1,28 @@
+{
+    "name": "@wxn0brp/veles-feed",
+    "version": "0.0.1",
+    "main": "src/index.ts",
+    "description": "",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/wxn0brP/VelesFeed.git"
+    },
+    "homepage": "https://github.com/wxn0brP/VelesFeed",
+    "author": "wxn0brP",
+    "license": "MIT",
+    "type": "module",
+    "scripts": {
+        "build": "pressure"
+    },
+    "devDependencies": {
+        "esbuild-style-plugin": "*",
+        "typescript": "*"
+    },
+    "dependencies": {
+        "@rowanmanning/feed-parser": "^2.1.1",
+        "@wxn0brp/db-core": "^0.3.0",
+        "@wxn0brp/db-storage-web": "^0.0.5",
+        "@wxn0brp/flanker-dialog": "^0.0.5",
+        "@wxn0brp/flanker-ui": "^0.4.4"
+    }
+}

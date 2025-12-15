@@ -1,0 +1,12 @@
+{
+    "html": [
+        "public/index.html"
+    ],
+    "entryPoints": [
+        "src/index.ts"
+    ],
+    "assets": [],
+    "external": [
+        "@wxn0brp/vql-client"
+    ]
+}

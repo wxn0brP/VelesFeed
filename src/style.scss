@@ -1,0 +1,50 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --txt: #fff;
+    --back: #111;
+    --accent: #3366cc;
+    --accentRGB: 51, 102, 204;
+
+    --item-back: #2a2a2a;
+    --item-border: #3a3a3a;
+}
+
+body {
+    background: var(--back);
+    color: var(--txt);
+    font-family:
+        -apple-system, BlinkMacSystemFont,
+        'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+        'Cantarell', 'Fira Sans', 'Droid Sans',
+        'Helvetica Neue', sans-serif;
+}
+
+header,
+nav {
+    background-color: #050505;
+}
+
+header {
+    height: 2rem;
+}
+
+main {
+    display: flex;
+}
+
+nav {
+    width: 200px;
+    height: calc(100vh - 2rem);
+    overflow-y: scroll;
+}
+
+aside {
+    overflow-y: scroll;
+    height: calc(100vh - 2rem);
+    width: calc(100vw - 200px);
+}

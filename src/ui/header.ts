@@ -1,0 +1,20 @@
+import { localDB } from "#core/db";
+import { fetchAllFeeds, loadFeed } from "#feed";
+import { VelesSource } from "#types";
+import { prompt, uiMsg } from "@wxn0brp/flanker-dialog";
+import "./header.scss";
+
+const header = qs("header");
+
+header.qs("add", 1).addEventListener("click", async () => {
+    const name = await prompt("Name");
+    const url = await prompt("URL");
+    const existing = await localDB.findOne<VelesSource>("source", { $or: [{ url }, { name }] });
+    if (existing) return uiMsg("Source already exists");
+
+    await localDB.add<VelesSource>("source", { name, url });
+    uiMsg("Source added");
+    loadFeed();
+});
+
+header.qs("fetch", 1).addEventListener("click", fetchAllFeeds);

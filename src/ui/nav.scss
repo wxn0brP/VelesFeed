@@ -1,0 +1,21 @@
+nav {
+    .rss-source {
+        display: flex;
+        align-items: center;
+        padding: 0.5rem;
+        cursor: pointer;
+
+        img {
+            width: 1.3rem;
+            height: 1.3rem;
+            margin-right: 0.5rem;
+        }
+    }
+
+    .rss-empty {
+        padding: 0.5rem;
+        width: 100%;
+        text-align: center;
+        word-break: word-break;
+    }
+}

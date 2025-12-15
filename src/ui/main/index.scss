@@ -1,0 +1,58 @@
+aside {
+    padding-top: 1rem;
+
+    div {
+        background-color: var(--item-back);
+        border: 1px solid var(--item-border);
+        border-radius: 6px;
+        padding: 0.75rem;
+        margin-bottom: 1rem;
+        transition: all 0.2s;
+        margin-inline: 1rem;
+
+        &:hover {
+            background-color: rgba(var(--accentRGB), 0.2);
+            transform: translateY(-2px);
+        }
+
+        h3 {
+            margin: 0 0 0.5rem 0;
+            color: var(--txt);
+        }
+
+        p {
+            margin: 0 0 0.5rem 0;
+            color: var(--txt);
+            font-size: 0.9rem;
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: bold;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+        img {
+            max-width: 100%;
+            border-radius: 4px;
+            margin-top: 0.5rem;
+        }
+
+        details {
+            margin-top: 5px;
+
+            summary {
+                cursor: pointer;
+            }
+        }
+
+        ul,
+        ol {
+            margin-left: 1rem;
+        }
+    }
+}
