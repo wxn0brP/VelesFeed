@@ -25,7 +25,7 @@ class MainUi implements UiComponent {
             return `<div>
                 <h3>${item.title || "No title"}</h3>
                 <p>${item.description || ""}</p>
-                <a href="${item.url || "#"}">Open Online</a>
+                <a href="${item.url || "#"}" target="_blank">Open Online</a>
                 ${img || ""}
                 <details>
                     <summary>Read more</summary>
