@@ -1,10 +1,16 @@
 import { localDB } from "#core/db";
 import { mgl } from "#core/mgl";
-import { VelesSource } from "#types";
+import { Settings, VelesSource } from "#types";
 import { mainUi } from "#ui/main";
 import { rssSourcesView } from "#ui/nav";
 import { parseFeed } from "@rowanmanning/feed-parser";
 import { FeedItem } from "@rowanmanning/feed-parser/lib/feed/item/base";
+
+function assignProxyUrl(URL: string, proxyUrl: string) {
+    if (!proxyUrl) return URL;
+    if (!URL.includes("$URL")) return proxyUrl + URL;
+    return proxyUrl.replace("$URL", URL);
+}
 
 export async function fetchFeed(url: string) {
     const res = await fetch(url);
@@ -20,8 +26,11 @@ export async function fetchAllFeeds() {
     const sources = await localDB.find<VelesSource>("source");
     console.log("Fetching feeds for", sources.length, "sources");
 
+    const proxyUrlData = await localDB.findOne<Settings>("config", { _id: "proxy" });
+    const proxyUrl = proxyUrlData?.v || "";
+
     await Promise.all(sources.map(async source => {
-        const feed = await fetchFeed(source.url);
+        const feed = await fetchFeed(assignProxyUrl(source.url, proxyUrl));
         const existing = await localDB.find<FeedItem>("feed/" + source._id);
 
         const missing = feed.items.filter(i => !existing.find(e => e.id === i.id));
