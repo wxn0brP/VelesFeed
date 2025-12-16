@@ -30,7 +30,12 @@ export async function fetchAllFeeds() {
     const proxyUrl = proxyUrlData?.v || "";
 
     await Promise.all(sources.map(async source => {
-        const feed = await fetchFeed(assignProxyUrl(source.url, proxyUrl));
+        const feed = await fetchFeed(assignProxyUrl(source.url, proxyUrl)).catch(e => {
+            console.log("Failed to fetch feed for", source.name)
+            console.error("Fetch Failed", source.name, e);
+            return null;
+        });
+        if (!feed) return;
         const existing = await localDB.find<FeedItem>("feed/" + source._id);
 
         const missing = feed.items.filter(i => !existing.find(e => e.id === i.id));
