@@ -1,0 +1,14 @@
+{
+    "icon": "default",
+    "win_icon": "default",
+    "name": "Veles Feed",
+    "description": "RSS Reader",
+    "version": "0.0.1",
+    "author": "wxn0brP",
+    "branch": "gh-pages",
+    "static": {
+        "dirs": {
+            "/": "."
+        }
+    }
+}
