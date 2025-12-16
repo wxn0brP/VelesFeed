@@ -5,7 +5,9 @@
     "entryPoints": [
         "src/index.ts"
     ],
-    "assets": [],
+    "assets": [
+        "zhiva.json"
+    ],
     "external": [
         "@wxn0brp/vql-client"
     ]
