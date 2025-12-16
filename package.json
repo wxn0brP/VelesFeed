@@ -11,9 +11,6 @@
     "author": "wxn0brP",
     "license": "MIT",
     "type": "module",
-    "scripts": {
-        "build": "pressure"
-    },
     "devDependencies": {
         "esbuild-style-plugin": "*",
         "typescript": "*"
