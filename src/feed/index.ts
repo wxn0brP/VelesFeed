@@ -1,8 +1,10 @@
 import { localDB } from "#core/db";
 import { mgl } from "#core/mgl";
-import { Settings, VelesSource } from "#types";
+import { VelesSource } from "#types";
 import { mainUi } from "#ui/main";
 import { rssSourcesView } from "#ui/nav";
+import { settings } from "#ui/settings/data";
+import { sourcesView as settingsSourcesView } from "#ui/settings/resources";
 import { parseFeed } from "@rowanmanning/feed-parser";
 import { FeedItem } from "@rowanmanning/feed-parser/lib/feed/item/base";
 
@@ -20,17 +22,15 @@ export async function fetchFeed(url: string) {
 export async function loadFeed() {
     const sources = await localDB.find<VelesSource>("source");
     rssSourcesView.render(sources);
+    settingsSourcesView.render(sources);
 }
 
 export async function fetchAllFeeds() {
     const sources = await localDB.find<VelesSource>("source");
     console.log("Fetching feeds for", sources.length, "sources");
 
-    const proxyUrlData = await localDB.findOne<Settings>("config", { _id: "proxy" });
-    const proxyUrl = proxyUrlData?.v || "";
-
     await Promise.all(sources.map(async source => {
-        const feed = await fetchFeed(assignProxyUrl(source.url, proxyUrl)).catch(e => {
+        const feed = await fetchFeed(assignProxyUrl(source.url, settings.proxyUrl.get())).catch(e => {
             console.log("Failed to fetch feed for", source.name)
             console.error("Fetch Failed", source.name, e);
             return null;

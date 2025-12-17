@@ -6,5 +6,13 @@ header {
         border-radius: 5px;
         padding: 5px;
         cursor: pointer;
+
+        &.active {
+            background-color: var(--accent);
+        }
+
+        &:hover {
+            background-color: rgba(var(--accentRGB), 0.9);
+        }
     }
 }
