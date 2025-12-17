@@ -13,11 +13,20 @@
     <header>
         <button data-id="add">Add</button>
         <button data-id="fetch">Fetch</button>
+        <button data-id="settings">Settings</button>
     </header>
 
     <main>
         <nav></nav>
         <aside></aside>
+        <section id="settings-panel">
+            <h2>Settings</h2>
+            <div id="settings-sources"></div>
+            <label>
+                Proxy URL:
+                <input type="text" data-id="proxy-url" placeholder="Enter proxy URL">
+            </label>
+        </section>
     </main>
 
     <div id="FD-message"></div>
