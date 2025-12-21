@@ -8,11 +8,13 @@ import { sourcesView as settingsSourcesView } from "#ui/settings/resources";
 import { parseFeed } from "@rowanmanning/feed-parser";
 import { FeedItem } from "@rowanmanning/feed-parser/lib/feed/item/base";
 
-const zhivaToken = typeof (window as any).zhiva_token !== "undefined" ? new URLSearchParams(window.location.search).get("secret") : "";
+const zhivaToken = typeof (window as any).zhiva_isApp !== "undefined" ?
+    new URLSearchParams(window.location.search).get("secret") :
+    "";
 
 function assignProxyUrl(URL: string, proxyUrl: string) {
     if (!proxyUrl) return URL;
-    if (!URL.includes("$URL")) return proxyUrl + URL;
+    if (!proxyUrl.includes("$URL")) return proxyUrl + URL;
     return proxyUrl.replace("$URL", URL);
 }
 

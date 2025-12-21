@@ -20,6 +20,6 @@ if (firstRun) {
     localStorage.setItem("run", "true");
 
     if (typeof (window as any).zhiva_isApp !== "undefined") {
-        localDB.config.add({ _id: "proxy", "v": "/proxy?url=$URL" });
+        localDB.config.add({ _id: "proxy", "v": "/api/proxy?url=" });
     }
 }
