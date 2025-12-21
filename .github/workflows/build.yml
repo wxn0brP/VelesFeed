@@ -34,6 +34,9 @@ jobs:
         run: |
           bun install
           bun run pressure/src/index.ts
+          mkdir -p dist/src
+          cp src/server.ts dist/src
+          cp package.json dist
 
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v4
