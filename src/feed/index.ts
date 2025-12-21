@@ -8,6 +8,8 @@ import { sourcesView as settingsSourcesView } from "#ui/settings/resources";
 import { parseFeed } from "@rowanmanning/feed-parser";
 import { FeedItem } from "@rowanmanning/feed-parser/lib/feed/item/base";
 
+const zhivaToken = typeof (window as any).zhiva_token !== "undefined" ? new URLSearchParams(window.location.search).get("secret") : "";
+
 function assignProxyUrl(URL: string, proxyUrl: string) {
     if (!proxyUrl) return URL;
     if (!URL.includes("$URL")) return proxyUrl + URL;
@@ -15,7 +17,9 @@ function assignProxyUrl(URL: string, proxyUrl: string) {
 }
 
 export async function fetchFeed(url: string) {
-    const res = await fetch(url);
+    const init: RequestInit = {};
+    if (zhivaToken) init.headers = { "x-zhiva-token": zhivaToken };
+    const res = await fetch(url, init);
     return parseFeed(await res.text());
 }
 
