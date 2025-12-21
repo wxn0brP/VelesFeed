@@ -9,7 +9,8 @@ const header = qs("header");
 
 header.qs("add", 1).addEventListener("click", async () => {
     const name = await prompt("Name");
-    const url = await prompt("URL");
+    let url = await prompt("URL");
+    if (url && !url.startsWith("http")) url = "https://" + url;
     const existing = await localDB.findOne<VelesSource>("source", { $or: [{ url }, { name }] });
     if (existing) return uiMsg("Source already exists");
 
