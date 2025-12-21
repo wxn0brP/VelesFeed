@@ -16,8 +16,11 @@ class MainUi implements UiComponent {
         this._loaded = id;
 
         data.sort((a, b) => a.published?.getTime?.() - b.published?.getTime?.());
+        this.render(data);
+    }
 
-        this.element.innerHTML = data.map(item => {
+    render(items: FeedItem[]) {
+        this.element.innerHTML = items.map(item => {
             const { image } = item;
 
             const img = image && `<img src="${image.url}" alt="${image.title || "Image"}">`;
