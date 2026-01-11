@@ -17,7 +17,7 @@
     "devDependencies": {
         "@rowanmanning/feed-parser": "^2.1.1",
         "@wxn0brp/db-core": "^0.3.0",
-        "@wxn0brp/db-storage-web": "^0.0.5",
+        "@wxn0brp/db-storage-web": "^0.0.6",
         "@wxn0brp/flanker-dialog": "^0.0.5",
         "@wxn0brp/flanker-ui": "^0.4.4",
         "@wxn0brp/zhiva-base-lib": "github:wxn0brP/Zhiva-base-lib",
