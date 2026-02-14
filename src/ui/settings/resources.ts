@@ -1,6 +1,6 @@
 import { localDB } from "#core/db";
 import { VelesSource } from "#types";
-import { prompt } from "@wxn0brp/flanker-dialog";
+import { prompt } from "@wxn0brp/flanker-dialog/prompt/index";
 import { mountView } from "@wxn0brp/flanker-ui";
 
 export const sourcesView = mountView<VelesSource>({
@@ -19,7 +19,7 @@ export const sourcesView = mountView<VelesSource>({
         "click": {
             ".edit": async (el) => {
                 const id = el.closest<HTMLElement>(".source-item").dataset.id;
-                const source = await localDB.source.findOne({ _id: id }) as VelesSource;
+                const source = await localDB.source.findOne({ _id: id });
                 const newUrl = await prompt("Enter new URL", source.url);
                 if (!newUrl) return;
                 await localDB.source.update({ _id: id }, { url: newUrl });

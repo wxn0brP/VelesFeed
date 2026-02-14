@@ -6,6 +6,7 @@ import { rssSourcesView } from "#ui/nav";
 import { settings } from "#ui/settings/data";
 import { sourcesView as settingsSourcesView } from "#ui/settings/resources";
 import { parseFeed } from "@rowanmanning/feed-parser";
+import { Feed } from "@rowanmanning/feed-parser/lib/feed/base";
 import { FeedItem } from "@rowanmanning/feed-parser/lib/feed/item/base";
 
 const zhivaToken = typeof (window as any).zhiva_isApp !== "undefined" ?
@@ -26,29 +27,30 @@ export async function fetchFeed(url: string) {
 }
 
 export async function loadFeed() {
-    const sources = await localDB.find<VelesSource>("source");
+    const sources = await localDB.source.find();
     rssSourcesView.render(sources);
     settingsSourcesView.render(sources);
 }
 
 export async function fetchAllFeeds() {
-    const sources = await localDB.find<VelesSource>("source");
+    const sources = await localDB.source.find();
     console.log("Fetching feeds for", sources.length, "sources");
 
     await Promise.all(sources.map(async source => {
-        const feed = await fetchFeed(assignProxyUrl(source.url, settings.proxyUrl.get())).catch(e => {
+        const feed: Feed = await fetchFeed(assignProxyUrl(source.url, settings.proxyUrl.get())).catch(e => {
             console.log("Failed to fetch feed for", source.name)
             console.error("Fetch Failed", source.name, e);
             return null;
         });
         if (!feed) return;
-        const existing = await localDB.find<FeedItem>("feed/" + source._id);
+        const collection = localDB.c<FeedItem>("feed/" + source._id);
+        const existing = await collection.find();
 
         const missing = feed.items.filter(i => !existing.find(e => e.id === i.id));
         console.log("Adding", missing.length, "items for", source.name);
 
         for (const item of missing)
-            await localDB.add("feed/" + source._id, item, false);
+            await collection.add(item, false);
 
         return feed;
     }));
@@ -59,7 +61,7 @@ export async function fetchAllFeeds() {
 
 mgl.feed = {
     clearCache: async (name: string) => {
-        const source = await localDB.findOne<VelesSource>("source", { name });
-        await localDB.remove("feed/" + source._id, {});
+        const source = await localDB.source.findOne({ name });
+        await localDB.removeCollection("feed/" + source._id);
     }
 }

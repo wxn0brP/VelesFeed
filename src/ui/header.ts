@@ -1,7 +1,7 @@
 import { localDB } from "#core/db";
 import { fetchAllFeeds, fetchFeed, loadFeed } from "#feed";
-import { VelesSource } from "#types";
-import { prompt, uiMsg } from "@wxn0brp/flanker-dialog";
+import { uiMsg } from "@wxn0brp/flanker-dialog/msg/index";
+import { prompt } from "@wxn0brp/flanker-dialog/prompt/index";
 import "./header.scss";
 import { mainUi } from "./main";
 import { toggle as toggleSettings } from "./settings/toggle";
@@ -12,10 +12,10 @@ header.qs("add", 1).addEventListener("click", async () => {
     const name = await prompt("Name");
     let url = await prompt("URL");
     if (url && !url.startsWith("http")) url = "https://" + url;
-    const existing = await localDB.findOne<VelesSource>("source", { $or: [{ url }, { name }] });
+    const existing = await localDB.source.findOne({ $or: [{ url }, { name }] });
     if (existing) return uiMsg("Source already exists");
 
-    await localDB.add<VelesSource>("source", { name, url });
+    await localDB.source.add({ name, url });
     uiMsg("Source added");
     loadFeed();
 });

@@ -12,7 +12,7 @@ class MainUi implements UiComponent {
     }
 
     async load(id: string) {
-        const data = await localDB.find<FeedItem>("feed/" + id);
+        const data = await localDB.find<FeedItem>({ collection: "feed/" + id });
         this._loaded = id;
 
         data.sort((a, b) => a.published?.getTime?.() - b.published?.getTime?.());
