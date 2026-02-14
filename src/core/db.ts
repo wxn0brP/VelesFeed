@@ -1,5 +1,5 @@
 import { Settings, VelesSource } from "#types";
-import { createMemoryValthera, forgeTypedValthera } from "@wxn0brp/db-core";
+import { forgeTypedValthera } from "@wxn0brp/db-core";
 import { createWebStorageValthera } from "@wxn0brp/db-storage-web";
 import { mgl } from "./mgl";
 
@@ -8,12 +8,7 @@ export const localDB = forgeTypedValthera<{
     config: Settings;
 }>(createWebStorageValthera("veles-feed"));
 
-export const memoryDB = createMemoryValthera();
-
-mgl.db = {
-    local: localDB,
-    memory: memoryDB
-}
+mgl.db = localDB;
 
 const firstRun = localStorage.getItem("run") !== "true";
 if (firstRun) {
