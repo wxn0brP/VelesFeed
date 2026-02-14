@@ -1,18 +1,17 @@
 aside {
-    padding-top: 1rem;
+    padding: 1rem;
 
-    div {
+    div.feed-item {
         background-color: var(--item-back);
         border: 1px solid var(--item-border);
-        border-radius: 6px;
-        padding: 0.75rem;
+        border-radius: var(--border-radius);
+        padding: 1rem;
         margin-bottom: 1rem;
-        transition: all 0.2s;
-        margin-inline: 1rem;
+        transition: box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
 
         &:hover {
-            background-color: rgba(var(--accentRGB), 0.2);
-            transform: translateY(-2px);
+            border-color: var(--accent);
+            box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.1);
         }
 
         h3 {
@@ -24,6 +23,7 @@ aside {
             margin: 0 0 0.5rem 0;
             color: var(--txt);
             font-size: 0.9rem;
+            opacity: 0.9;
         }
 
         a {
@@ -43,10 +43,13 @@ aside {
         }
 
         details {
-            margin-top: 5px;
+            margin-top: 1rem;
+            border-top: 1px solid var(--item-border);
+            padding-top: 1rem;
 
             summary {
                 cursor: pointer;
+                font-weight: 500;
             }
         }
 

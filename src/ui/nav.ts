@@ -24,7 +24,8 @@ export const rssSourcesView = mountView({
         click: {
             ".rss-source": (el) => {
                 const id = el.dataset.id;
-                console.log("Selected RSS source:", id);
+                qs("nav .rss-source.active")?.classList.remove("active");
+                el.classList.add("active");
                 mainUi.load(id);
             }
         }

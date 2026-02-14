@@ -9,10 +9,23 @@
     --back: #111;
     --accent: #3366cc;
     --accentRGB: 51, 102, 204;
-
     --item-back: #2a2a2a;
     --item-border: #3a3a3a;
+    --header-back: #050505;
+    --border-radius: 6px;
+    --header-height: 3rem;
 }
+
+@media (prefers-color-scheme: light) {
+    :root {
+        --txt: #222;
+        --back: #f0f0f0;
+        --item-back: #fff;
+        --item-border: #ddd;
+        --header-back: #f8f8f8;
+    }
+}
+
 
 body {
     background: var(--back);
@@ -22,15 +35,21 @@ body {
         'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
         'Cantarell', 'Fira Sans', 'Droid Sans',
         'Helvetica Neue', sans-serif;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 header,
 nav {
-    background-color: #050505;
+    background-color: var(--header-back);
+    border-bottom: 1px solid var(--item-border);
 }
 
 header {
-    height: 2rem;
+    height: var(--header-height);
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+    gap: 0.5rem;
 }
 
 main {
@@ -39,12 +58,13 @@ main {
 
 nav {
     width: 200px;
-    height: calc(100vh - 2rem);
-    overflow-y: scroll;
+    height: calc(100vh - var(--header-height));
+    overflow-y: auto;
+    border-right: 1px solid var(--item-border);
 }
 
 aside {
     overflow-y: scroll;
-    height: calc(100vh - 2rem);
+    height: calc(100vh - var(--header-height));
     width: calc(100vw - 200px);
 }

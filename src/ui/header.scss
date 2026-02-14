@@ -1,18 +1,22 @@
 header {
     button {
-        background: none;
-        border: 2px solid var(--accent);
+        background: transparent;
+        border: 1px solid var(--item-border);
         color: var(--txt);
-        border-radius: 5px;
-        padding: 5px;
+        border-radius: var(--border-radius);
+        padding: 0.4rem 0.8rem;
         cursor: pointer;
+        transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+        font-weight: 500;
 
         &.active {
             background-color: var(--accent);
+            border-color: var(--accent);
+            color: #fff;
         }
 
-        &:hover {
-            background-color: rgba(var(--accentRGB), 0.9);
+        &:hover:not(.active) {
+            background-color: var(--item-back);
         }
     }
 }

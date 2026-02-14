@@ -25,7 +25,7 @@ class MainUi implements UiComponent {
 
             const img = image && `<img src="${image.url}" alt="${image.title || "Image"}">`;
 
-            return `<div>
+            return `<div class="feed-item">
                 <h3>${item.title || "No title"}</h3>
                 <p>${item.description || ""}</p>
                 <a href="${item.url || "#"}" target="_blank">Open Online</a>
