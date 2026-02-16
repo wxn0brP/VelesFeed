@@ -9,4 +9,5 @@ export async function saveSettings() {
 
 const register = (cell: ReactiveCell<any>, dbKey: Settings["_id"]) =>
     cell.subscribe(v =>
-        localDB.config.updateOneOrAdd({ _id: dbKey }, { v }, {}));
+        localDB.config.updateOneOrAdd({ _id: dbKey }, { v }, {})
+    );
