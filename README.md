@@ -15,20 +15,20 @@ This project is currently a Proof of Concept (PoC) and is not production-ready.
 - Stores all data in the browser's local storage
 - Simple and clean user interface
 
-## Installation
+## Installation (starting from scratch)
 
 1.  Clone the repository:
     ```bash
     git clone https://github.com/wxn0brP/VelesFeed.git
     ```
-2.  Install `pressure` build tool via [`ingr`](https://github.com/wxn0brP/dotfiles):
-    ```bash
-    ingr pressure
-    ```
-4.  Install the dependencies using `bun`:
+2.  Install the dependencies using `bun`:
     ```bash
     cd VelesFeed
     bun install
+    ```
+3.  Build the project via [pressure](https://github.com/wxn0brP/pressure):
+    ```bash
+    pressure
     ```
 
 ## Usage
