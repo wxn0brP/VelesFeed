@@ -18,28 +18,8 @@ jobs:
       contents: write
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v6
-
-      - name: Install Bun
-        uses: oven-sh/setup-bun@v2
-
-      - name: Install Pressure
-        run: |
-          git clone https://github.com/wxn0brP/pressure.git
-          cd pressure
-          bun install
-
-      - name: Build project
-        run: |
-          bun install
-          bun run pressure/src/index.ts
-          mkdir -p dist/src
-          cp src/server.ts dist/src
-          cp package.json dist
-
-      - name: Deploy to gh-pages
-        uses: peaceiris/actions-gh-pages@v4
+      - name: Run pressure
+        uses: wxn0brP/pressure@master
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          post: "mkdir -p dist/src && cp src/server.ts dist/src && cp package.json dist"
