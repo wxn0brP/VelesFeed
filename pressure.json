@@ -1,0 +1,14 @@
+{
+    "html": [
+        "public/index.html"
+    ],
+    "entryPoints": [
+        "src/index.ts"
+    ],
+    "assets": [
+        "zhiva.json"
+    ],
+    "external": [
+        "@wxn0brp/vql-client"
+    ]
+}

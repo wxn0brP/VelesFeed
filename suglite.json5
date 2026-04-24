@@ -1,0 +1,13 @@
+{
+    cmd: "tsc --noEmit && pressure",
+    watch: [
+        "src",
+    ],
+    server: 19984,
+    server_map: {
+        dir: {
+            "/": "public",
+            "-/": "dist",
+        },
+    }
+}
