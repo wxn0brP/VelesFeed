@@ -1,6 +1,6 @@
 # Veles Feed
 
-[![Install via Zhiva](https://img.shields.io/badge/Zhiva-install-blue)](zhiva://install/VelesFeed)
+[![Install via Zhiva](https://img.shields.io/badge/Zhiva-install-blue)](https://wxn0brp.github.io/Zhiva-page/i#app=VelesFeed)
 
 Veles Feed is a simple, client-side RSS feed reader. It allows you to add your favorite feed sources and view the articles in a clean and simple interface. All data is stored locally in your browser.
 
