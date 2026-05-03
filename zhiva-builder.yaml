@@ -1,0 +1,28 @@
+build:
+    cmd: ""
+
+files:
+    - "dist"
+    - "public"
+    - "LICENSE"
+    - "package.json"
+    - "tsconfig.json"
+    - "zhiva.json"
+
+output:
+    name: "veles-feed"
+    dir: "./releases"
+
+define:
+
+linux:
+    format:
+        - "7z"
+
+win32:
+    format:
+        - "7z"
+
+darwin:
+    format:
+        - "7z"

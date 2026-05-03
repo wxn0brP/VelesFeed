@@ -6,3 +6,4 @@ package-lock.json
 yarn.lock
 bun.lock
 .zhiva-port
+releases
