@@ -1,7 +1,7 @@
 {
 	"name": "@wxn0brp/veles-feed",
 	"version": "0.0.1",
-	"main": "src/index.ts",
+	"main": "src/server.ts",
 	"description": "",
 	"repository": {
 		"type": "git",
