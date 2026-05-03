@@ -23,3 +23,9 @@ jobs:
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           post: "mkdir -p dist/src && cp src/server.ts dist/src && cp package.json dist"
+
+      - name: Run zhiva builder
+        uses: wxn0brP/Zhiva-builder@master
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          nightly: "latest"
