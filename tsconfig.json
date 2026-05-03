@@ -12,6 +12,8 @@
 		"skipLibCheck": true,
 		"outDir": "./dist",
 		"declaration": true,
+		"rootDir": "./src",
+		"strict": false,
 		"types": [
 			"esbuild-style-plugin",
 			"@wxn0brp/flanker-ui"
