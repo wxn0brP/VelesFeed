@@ -29,3 +29,4 @@ jobs:
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           nightly: "latest"
+          checkout: "false"
