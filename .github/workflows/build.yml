@@ -24,6 +24,14 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           post: "mkdir -p dist/src && cp src/server.ts dist/src && cp package.json dist"
 
+      - name: Upload całego workspace jako artefakt
+        uses: actions/upload-artifact@v7
+        with:
+          name: debug-workspace-${{ github.run_id }}
+          path: .
+          retention-days: 1
+          overwrite: true
+
       - name: Run zhiva builder
         uses: wxn0brP/Zhiva-builder@master
         with:
