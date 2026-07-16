@@ -22,6 +22,6 @@
 		"@wxn0brp/flanker-ui": "^0.5.1",
 		"@wxn0brp/zhiva-base-lib": "github:wxn0brP/Zhiva-base-lib",
 		"esbuild-style-plugin": "*",
-		"typescript": "^6"
+		"typescript": "^7.0.0"
 	}
 }
