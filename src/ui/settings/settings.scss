@@ -48,6 +48,22 @@
         border-radius: var(--border-radius);
         margin-bottom: 0.5rem;
 
+        .source-name {
+            flex: 1;
+            min-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .source-type {
+            font-style: normal;
+            font-size: 0.7rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            opacity: 0.6;
+        }
+
         .actions {
             display: flex;
             gap: 0.5rem;

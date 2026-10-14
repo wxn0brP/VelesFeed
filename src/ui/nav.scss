@@ -5,16 +5,57 @@ nav {
         display: flex;
         align-items: center;
         padding: 0.5rem 1rem;
+        background: none;
+        border: none;
+        color: inherit;
+        font: inherit;
+        text-align: left;
         cursor: pointer;
         border-radius: var(--border-radius);
         margin-inline: 0.5rem;
         margin-bottom: 0.25rem;
         transition: background-color 0.2s, color 0.2s;
 
-        img {
+        .rss-name {
+            flex: 1;
+            min-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .rss-type {
+            flex: 0 0 auto;
+            margin-left: 0.5rem;
+            font-size: 0.7rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            opacity: 0.6;
+        }
+
+        .rss-icon {
+            flex: 0 0 auto;
+            display: grid;
+            place-items: center;
             width: 1.3rem;
             height: 1.3rem;
             margin-right: 0.75rem;
+            border-radius: 4px;
+            overflow: hidden;
+            font-size: 0.75rem;
+            font-weight: 600;
+            line-height: 1;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+
+            &.icon-fallback {
+                background-color: var(--item-border);
+                color: var(--txt);
+            }
         }
 
         &:hover {
@@ -31,6 +72,13 @@ nav {
         padding: 1rem;
         width: 100%;
         text-align: center;
+        word-break: break-word;
+        opacity: 0.7;
+    }
+
+    .rss-invalid {
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
         word-break: break-word;
         opacity: 0.7;
     }

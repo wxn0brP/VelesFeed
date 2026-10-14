@@ -2,7 +2,7 @@
 
 [![Install via Zhiva](https://img.shields.io/badge/Zhiva-install-blue)](https://wxn0brp.github.io/Zhiva-page/i#app=VelesFeed)
 
-Veles Feed is a simple, client-side RSS feed reader. It allows you to add your favorite feed sources and view the articles in a clean and simple interface. All data is stored locally in your browser.
+Veles Feed is a simple, client-side feed reader for RSS and Atom. It allows you to add your favorite feed sources and view the articles in a clean and simple interface. All data is stored locally in your browser.
 
 ## Status
 
@@ -10,7 +10,7 @@ This project is currently a Proof of Concept (PoC) and is not production-ready.
 
 ## Features
 
-- Add and manage multiple RSS feed sources
+- Add and manage multiple feed sources (RSS and Atom)
 - Fetches and displays feed items
 - Stores all data in the browser's local storage
 - Simple and clean user interface

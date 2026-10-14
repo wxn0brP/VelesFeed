@@ -1,6 +1,5 @@
 import { localDB } from "#core/db";
 import { mgl } from "#core/mgl";
-import { VelesSource } from "#types";
 import { mainUi } from "#ui/main";
 import { rssSourcesView } from "#ui/nav";
 import { settings } from "#ui/settings/data";
@@ -9,59 +8,91 @@ import { parseFeed } from "@rowanmanning/feed-parser";
 import { Feed } from "@rowanmanning/feed-parser/lib/feed/base";
 import { FeedItem } from "@rowanmanning/feed-parser/lib/feed/item/base";
 
-const zhivaToken = typeof (window as any).zhiva_isApp !== "undefined" ?
-    new URLSearchParams(window.location.search).get("secret") :
-    "";
+const zhivaToken =
+	typeof (window as any).zhiva_isApp !== "undefined"
+		? new URLSearchParams(window.location.search).get("zhiva-secret")
+		: "";
 
-function assignProxyUrl(URL: string, proxyUrl: string) {
-    if (!proxyUrl) return URL;
-    if (!proxyUrl.includes("$URL")) return proxyUrl + URL;
-    return proxyUrl.replace("$URL", URL);
+export function assignProxyUrl(URL: string, proxyUrl: string) {
+	if (!proxyUrl) return URL;
+	const target = encodeURIComponent(URL);
+	if (!proxyUrl.includes("$URL")) return proxyUrl + target;
+	return proxyUrl.replace("$URL", target);
 }
 
 export async function fetchFeed(url: string) {
-    const init: RequestInit = {};
-    if (zhivaToken) init.headers = { "x-zhiva-token": zhivaToken };
-    const res = await fetch(url, init);
-    return parseFeed(await res.text());
+	const init: RequestInit = {};
+	if (zhivaToken && url.startsWith("/"))
+		init.headers = {
+			"x-zhiva-token": zhivaToken,
+		};
+	const res = await fetch(url, init);
+	if (!res.ok) throw new Error(`Failed to fetch ${url}: HTTP ${res.status}`);
+	return parseFeed(await res.text());
 }
 
 export async function loadFeed() {
-    const sources = await localDB.source.find();
-    rssSourcesView.render(sources);
-    settingsSourcesView.render(sources);
+	const sources = await localDB.source.find();
+	rssSourcesView.render(sources);
+	settingsSourcesView.render(sources);
 }
 
-export async function fetchAllFeeds() {
-    const sources = await localDB.source.find();
-    console.log("Fetching feeds for", sources.length, "sources");
+export interface FetchSummary {
+	total: number;
+	failed: string[];
+}
 
-    await Promise.all(sources.map(async source => {
-        const feed: Feed = await fetchFeed(assignProxyUrl(source.url, settings.proxyUrl.get())).catch(e => {
-            console.log("Failed to fetch feed for", source.name)
-            console.error("Fetch Failed", source.name, e);
-            return null;
-        });
-        if (!feed) return;
-        const collection = localDB.c<FeedItem>("feed/" + source._id);
-        const existing = await collection.find();
+export async function fetchAllFeeds(): Promise<FetchSummary> {
+	const sources = await localDB.source.find();
+	const failed: string[] = [];
 
-        const missing = feed.items.filter(i => !existing.find(e => e.id === i.id));
-        console.log("Adding", missing.length, "items for", source.name);
+	await Promise.all(
+		sources.map(async source => {
+			const feed: Feed = await fetchFeed(
+				assignProxyUrl(source.url, settings.proxyUrl.get()),
+			).catch(e => {
+				console.error("Fetch failed", source.name, e);
+				failed.push(source.name || source.url);
+				return null;
+			});
+			if (!feed) return;
 
-        for (const item of missing)
-            await collection.add(item, false);
+			const type = feed.meta?.type;
+			if (type && type !== source.type) {
+				await localDB.source.update(
+					{
+						_id: source._id,
+					},
+					{
+						type,
+						version: feed.meta?.version,
+					},
+				);
+			}
 
-        return feed;
-    }));
+			const collection = localDB.c<FeedItem>("feed/" + source._id);
+			const existing = await collection.find();
+			const missing = feed.items.filter(
+				i => !existing.find(e => e.id === i.id),
+			);
 
-    console.log("Done");
-    mainUi.refresh();
+			for (const item of missing) await collection.add(item, false);
+		}),
+	);
+
+	loadFeed();
+	mainUi.refresh();
+	return {
+		total: sources.length,
+		failed,
+	};
 }
 
 mgl.feed = {
-    clearCache: async (name: string) => {
-        const source = await localDB.source.findOne({ name });
-        await localDB.removeCollection("feed/" + source._id);
-    }
-}
+	clearCache: async (name: string) => {
+		const source = await localDB.source.findOne({
+			name,
+		});
+		await localDB.removeCollection("feed/" + source._id);
+	},
+};

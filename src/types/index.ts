@@ -1,13 +1,14 @@
 export interface VelesSource {
-    _id?: string;
-    url?: string;
-    name?: string;
+	_id?: string;
+	url?: string;
+	name?: string;
+	type?: string;
+	version?: string;
 }
 
 export interface Setting<T = any, ID = string> {
-    _id: ID;
-    v: T;
+	_id: ID;
+	v: T;
 }
 
-export type Settings =
-    | Setting<string, "proxy">
+export type Settings = Setting<string, "proxy">;

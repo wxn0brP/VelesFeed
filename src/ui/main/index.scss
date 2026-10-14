@@ -1,7 +1,13 @@
 aside {
     padding: 1rem;
 
-    div.feed-item {
+    .feed-state {
+        padding: 2rem 1rem;
+        text-align: center;
+        opacity: 0.7;
+    }
+
+    .feed-item {
         background-color: var(--item-back);
         border: 1px solid var(--item-border);
         border-radius: var(--border-radius);

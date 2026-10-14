@@ -5,11 +5,11 @@ import { settingsPanel } from "./html";
 const aside = qs("aside");
 const viewStatus = new ReactiveCell(false);
 export function toggle(e: Event) {
-    toggleBoolean(viewStatus);
-    (e.target as HTMLButtonElement).clT("active");
+	toggleBoolean(viewStatus);
+	(e.target as HTMLButtonElement).clT("active");
 }
 
 viewStatus.subscribe(v => {
-    aside.style.display = v ? "none" : "";
-    settingsPanel.style.display = v ? "" : "none";
+	aside.style.display = v ? "none" : "";
+	settingsPanel.style.display = v ? "" : "none";
 });

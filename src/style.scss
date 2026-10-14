@@ -68,3 +68,58 @@ aside {
     height: calc(100vh - var(--header-height));
     width: calc(100vw - 200px);
 }
+
+:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+@media (max-width: 720px) {
+    header {
+        height: auto;
+        min-height: var(--header-height);
+        flex-wrap: wrap;
+        padding: 0.5rem 0.75rem;
+    }
+
+    main {
+        flex-direction: column;
+    }
+
+    nav {
+        width: 100%;
+        height: auto;
+        max-height: 40vh;
+        display: flex;
+        gap: 0.5rem;
+        padding: 0.5rem;
+        overflow-x: auto;
+        overflow-y: hidden;
+        border-right: none;
+        border-bottom: 1px solid var(--item-border);
+    }
+
+    nav .rss-source {
+        flex: 0 0 auto;
+        margin: 0;
+    }
+
+    nav .rss-empty {
+        width: auto;
+        white-space: nowrap;
+    }
+
+    header button,
+    nav .rss-source,
+    #settings-panel button {
+        min-height: 44px;
+    }
+
+    aside,
+    main #settings-panel {
+        width: 100%;
+        height: auto;
+        min-height: calc(100vh - var(--header-height));
+        overflow: visible;
+    }
+}
