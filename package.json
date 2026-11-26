@@ -17,7 +17,7 @@
 	"devDependencies": {
 		"@rowanmanning/feed-parser": "^2.1.5",
 		"@wxn0brp/biome": "*",
-		"@wxn0brp/db-core": "^0.12.9",
+		"@wxn0brp/db-core": "^0.13.0",
 		"@wxn0brp/db-storage-web": "^0.120.1",
 		"@wxn0brp/flanker-dialog": "^0.1.1",
 		"@wxn0brp/flanker-ui": "^0.5.3",
